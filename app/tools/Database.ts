@@ -6,19 +6,16 @@ export async function databaseTool(
   department?: string
 ): Promise<string> {
   const mongoUri = process.env.MONGODB_URI;
-
   if (!mongoUri) {
     throw new Error(
       "MongoDB URI not configured. Please set MONGODB_URI in your environment variables."
     );
   }
-
   const client = new MongoClient(mongoUri);
-
   try {
     await client.connect();
-    const database = client.db("company"); // Database name
-    const employeesCollection = database.collection("employees"); // Collection name
+    const database = client.db("company");
+    const employeesCollection = database.collection("employees");
 
     const now = new Date();
     const oneMonthAgo = new Date(
